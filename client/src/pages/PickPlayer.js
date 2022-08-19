@@ -9,7 +9,6 @@ import { QUERY_ALL_PLAYERS } from '../utils/queries'
 export default function PickPlayer() {
     const { loading, data } = useQuery(QUERY_ALL_PLAYERS);
     const players = data || []
-    console.log(players)
     
 
     return (

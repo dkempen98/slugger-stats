@@ -147,10 +147,7 @@ export default function RecordGame() {
     } 
 
     useEffect(() => {
-        console.log(run)
         if(run === true || run === false) {
-            console.log(countForAvg)
-            console.log(basesHit)
             try {
                 const { data } = addStats({
                     variables: {

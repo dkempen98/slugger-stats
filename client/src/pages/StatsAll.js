@@ -9,6 +9,7 @@ export default function Statsall() {
     const { loading, data } = useQuery(QUERY_ALL_PLAYERS);
     const players = data || []
     
+    
 
     return (
         <main>
@@ -17,9 +18,13 @@ export default function Statsall() {
                 {loading ? (
                     <div>Loading...</div>
                 ) : (
-                    <PlayerList
-                        players={players}
-                    />
+                    players === [] ? (
+                            <PlayerList
+                                players={players}
+                            /> 
+                        ) : (
+                            <h2>No Players Available</h2>
+                        )
                 )}
             </div>
         </main>

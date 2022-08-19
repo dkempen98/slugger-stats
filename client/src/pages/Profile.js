@@ -1,23 +1,24 @@
-// DO NOT TOUCH DREW IS WORKING ON
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
-import { Navigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
-import { QUERY_PROFILE, QUERY_USER_PLAYERS } from "../utils/queries";
+import { QUERY_PROFILE } from "../utils/queries";
 import { NEW_PLAYER } from "../utils/mutations";
 import Auth from "../utils/auth";
-import { Button, Card, Form, Row } from "react-bootstrap";
-import { Link } from 'react-router-dom'
+import { Button, Form, Row } from "react-bootstrap";
 import ProfilePlayers from "../components/ProfilePlayers";
 Modal.setAppElement("#root");
 
 export default function Profile() {
   // Modal Logic
   const [open, setOpen] = useState(false);
+  // const [position, setPosition] = useState([]);
 
-  function openModal() {
+  function openModal(clear) {
     setOpen(!open);
+    // if(clear) {
+    //   setPosition([])
+    //   console.log(position)
+    // }
   }
 
   // New Player Form Logic
@@ -28,6 +29,8 @@ export default function Profile() {
     position: [],
     handedness: "",
   });
+
+
   const [newPlayer, { playerError, playerData }] = useMutation(NEW_PLAYER);
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -36,8 +39,13 @@ export default function Profile() {
 
     if (name === "number") {
       newValue = parseInt(value);
-      console.log(typeof newValue);
     }
+
+    // if (name === "position") {
+    //   setPosition(positions => [...positions, value])
+    //   newValue = position
+    //   console.log(newValue)
+    // }
 
     setFormState({
       ...formState,
@@ -47,7 +55,6 @@ export default function Profile() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
 
     try {
       const { data } = await newPlayer({
@@ -74,6 +81,7 @@ const modalStyle = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    maxHeight: '30rem'
   },
 };
 
@@ -108,7 +116,7 @@ if (loading) {
         </div>
         <Modal
           isOpen={open}
-          onRequestClose={() => openModal()}
+          onRequestClose={() => openModal(false)}
           contentLabel="New Player"
           style={modalStyle}
         >      
@@ -143,7 +151,7 @@ if (loading) {
             />
 
           </Form.Group>
-          <Form.Group className="mb-3">
+          {/* <Form.Group className="mb-3">
           <Form.Label>Position</Form.Label>
             <Form.Control
               onChange={handleChange}
@@ -160,9 +168,128 @@ if (loading) {
               type="handedness"
               placeholder="Enter Handedness"
             />
-          </Form.Group>
+          </Form.Group> */}
+          <Form.Label>Position</Form.Label>
+          <div key={`position`} className="mb-3">
+            <Form.Check
+              onChange={handleChange}
+              label="Catcher"
+              name="position"
+              type={"radio"}
+              id={`C`}
+              value='C'
+            />
+            <Form.Check
+              label="First Base"
+              onChange={handleChange}
+              name="position"
+              type={"radio"}
+              id={`1B`}
+              value='1B'
+            />
+            <Form.Check
+              label="Second Base"
+              onChange={handleChange}
+              name="position"
+              type={"radio"}
+              id={`2B`}
+              value='2B'
+            />
+            <Form.Check
+              label="Third Base"
+              onChange={handleChange}
+              name="position"
+              type={"radio"}
+              id={`3B`}
+              value='3B'
+            />
+            <Form.Check
+              label="Shortstop"
+              onChange={handleChange}
+              name="position"
+              type={"radio"}
+              id={`SS`}
+              value='SS'
+            />
+            <Form.Check
+              label="Outfield"
+              onChange={handleChange}
+              name="position"
+              type={"radio"}
+              id={`OF`}
+              value='OF'
+            />
+            <Form.Check
+              label="Pitcher"
+              onChange={handleChange}
+              name="position"
+              type={"radio"}
+              id={`P`}
+              value='P'
+            />
+            <Form.Check
+              label="Designated Hitter"
+              onChange={handleChange}
+              name="position"
+              type={"radio"}
+              id={`DH`}
+              value='DH'
+            />
+          </div>
+          <Form.Label>Handedness</Form.Label>
+          <div key={`handedness`} className="mb-3">
+            <Form.Check
+              label="Right"
+              onChange={handleChange}
+              name="handedness"
+              type={"radio"}
+              id={`R`}
+              value='R'
+            />
+            <Form.Check
+              label="Left"
+              onChange={handleChange}
+              name="handedness"
+              type={"radio"}
+              id={`L`}
+              value='L'
+            />
+            <Form.Check
+              label="Switch"
+              onChange={handleChange}
+              name="handedness"
+              type={"radio"}
+              id={`S`}
+              value='S'
+            />
+          </div>
+          {/* <Form.Label>Fielding Handedness</Form.Label>
+          <div key={`field`} className="mb-3">
+            <Form.Check
+              inline
+              label="Right"
+              name="field"
+              type={"radio"}
+              id={`BR`}
+              value='R'
+            />
+            <Form.Check
+              label="Left"
+              name="field"
+              type={"radio"}
+              id={`1B`}
+              value='1B'
+            />
+            <Form.Check
+              label="Switch"
+              name="field"
+              type={"radio"}
+              id={`2B`}
+              value='2B'
+            />
+          </div> */}
           <Row className="justify-content-center">
-            <Button className='mr-2' variant="primary" onClick={() => openModal()}>
+            <Button className='mr-2' variant="primary" onClick={() => openModal(true)}>
               Cancel
             </Button>
             <Button variant="primary" type="submit" onClick={() => window.location.reload()}>

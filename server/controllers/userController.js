@@ -39,7 +39,6 @@ module.exports = {
     res.json({ user, token });
   },
   async savePlayer({ user, params, body }, res) {
-    console.log(user);
     try {
       const updatedUser = await User.findOneAndUpdate(
         { $or: [{ _id: user ? user.id : params.id }, { email: params.email }] },

@@ -127,7 +127,6 @@ const resolvers = {
     },
     editStat: async (parent, { playerId, statId, input }, context) => {
       if (context.user) {
-        console.log(input)
       const stat = await Player.findOneAndUpdate(
         { _id: playerId },
         {
