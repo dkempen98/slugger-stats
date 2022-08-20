@@ -38,9 +38,7 @@ The following NPM packages are used for this site:
 
 ## Questions?
 
-Still have any questions? Feel free to reach me using:
-
-Email Address: drewkempen98@gmail.com
+Still have any questions? Feel free to reach me here: drewkempen98@gmail.com
 
 ![image](https://user-images.githubusercontent.com/25507661/180082855-17192412-97ce-4277-8dee-1a3a860e9487.png)
 
