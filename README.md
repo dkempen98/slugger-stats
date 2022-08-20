@@ -2,6 +2,8 @@
 
 Baseball stat tracking software with step-by-step guidance for at-bats that allows you to view season and career long statistics.
 
+[Video overview of the application](https://youtu.be/kSDWBuGwHMc)
+
 LIVE LINK COMING SOON
 
 ## Usage
