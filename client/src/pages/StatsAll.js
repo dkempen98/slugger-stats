@@ -18,13 +18,9 @@ export default function Statsall() {
                 {loading ? (
                     <div>Loading...</div>
                 ) : (
-                    players === [] ? (
-                            <PlayerList
-                                players={players}
-                            /> 
-                        ) : (
-                            <h2>No Players Available</h2>
-                        )
+                    <PlayerList
+                        players={players}
+                    /> 
                 )}
             </div>
         </main>
